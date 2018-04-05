@@ -4,6 +4,6 @@
 }
 
 .App-test-child {
-  flex: 1 0 25%; /* explanation below */
+  flex: 1 25%;
   margin: 5px;
 }
