@@ -1,9 +1,17 @@
 .App-test-parent {
   display: flex;
-  flex-flow: row-reverse wrap-reverse;
+  flex-flow: row wrap;
 }
 
 .App-test-child {
-  flex: 1 25%;
+  flex: 1 20%;
   margin: 5px;
+}
+
+.result-box {
+  border: 1px solid gray;
+  height: 45px; 
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 }
