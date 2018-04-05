@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import math from 'mathjs';
+import { Observable } from 'rxjs';
 import './App.css';
 import * as actionTypes from './store/actions';
 
 class App extends Component {
-  buttons = ['=', '.', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '+'];
-  buttons2 = ['/', '+', '-', '*'];
   newButtons = [
     '7',
     '8',
@@ -25,6 +24,33 @@ class App extends Component {
     '=',
     '*'
   ];
+
+  escFunction(event) {
+    if (event.keyCode === 32) {
+      const testArr = [...'123213+4324324'];
+
+      Observable.interval(50 /* ms */)
+        .take(testArr.length)
+        .subscribe(
+          idx => {
+            this.props.addSymbol(testArr[idx]);
+          },
+          undefined,
+          () => {
+            const result = math.eval(this.props.currentOperation);
+            this.props.resolveCompute(result);
+          }
+        );
+    }
+  }
+
+  componentDidMount() {
+    document.addEventListener('keydown', this.escFunction.bind(this), false);
+  }
+  componentWillUnmount() {
+    document.removeEventListener('keydown', this.escFunction, false);
+  }
+
   resolveButton(symbol) {
     if (symbol === '=') {
       const result = math.eval(this.props.currentOperation);
@@ -50,10 +76,10 @@ class App extends Component {
               </div>
 
               <div className="row">
-                <div className="col m10 result-box">
+                <div className="col m9 result-box">
                   {this.props.currentOperation}
                 </div>
-                <div className="col m2">
+                <div className="col m3">
                   <a
                     className="waves-effect waves-light btn"
                     onClick={() => this.resolveButton('C')}
@@ -64,7 +90,7 @@ class App extends Component {
               </div>
 
               <div className="row">
-                <div className="App-test-parent col m12">
+                <div className="App-test-parent">
                   {this.newButtons.map(button => (
                     <a
                       key={button}

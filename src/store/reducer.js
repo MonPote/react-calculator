@@ -16,7 +16,7 @@ const reducer = (state = intialState, action) => {
       return { ...state, currentResult: action.symbol };
     }
     case actionTypes.CLEAR_OPERATION: {
-      return { ...state, currentOperation: '' };
+      return { ...state, currentOperation: '', currentResult: '0' };
     }
     default:
       return state;
