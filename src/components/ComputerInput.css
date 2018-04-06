@@ -1,0 +1,12 @@
+.result-box {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  padding: 0 3%;
+  height: 45px; 
+  border: 1px solid gray;
+  
+  white-space: nowrap;
+  overflow-x: hidden;
+}
