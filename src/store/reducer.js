@@ -16,7 +16,7 @@ const reducer = (state = intialState, action) => {
       ) {
         return {
           ...state,
-          currentOperation: state.currentOperation + action.symbol || ''
+          currentOperation: state.currentOperation + action.symbol
         };
       }
       return state;

@@ -42,6 +42,7 @@ class App extends Component {
     if (!this.props.isMonkeyTyping && event.keyCode === 32) {
       const randomExp = this.generateSimpleRandomExpr();
       const randomExpArray = [...randomExp];
+      this.props.clearOperation();
       this.props.updateIsMonkeyTyping(true);
 
       Observable.interval(50 /* ms */)
@@ -117,7 +118,8 @@ const mapDispatchToPros = dispatch => {
       dispatch({ type: actionTypes.RESOLVE_SYMBOL, symbol }),
     displayError: () => dispatch({ type: actionTypes.DISPLAY_ERROR }),
     updateIsMonkeyTyping: isTyping =>
-      dispatch({ type: actionTypes.MONKEY_IS_TYPING, isTyping })
+      dispatch({ type: actionTypes.MONKEY_IS_TYPING, isTyping }),
+    clearOperation: () => dispatch({ type: actionTypes.CLEAR_OPERATION })
   };
 };
 
