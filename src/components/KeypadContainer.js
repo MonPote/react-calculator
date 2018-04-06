@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import math from 'mathjs';
 import * as actionTypes from '../store/actions';
 import './KeypadContainer.css';
+import { operatorRegex, nbRegex } from '../regex';
 
 export class KeypadContainer extends Component {
   resolveButton(symbol) {
@@ -16,9 +17,9 @@ export class KeypadContainer extends Component {
           this.props.displayError();
         }
       }
-    } else if (symbol.match(/^[/x+-]{1}$/)) {
+    } else if (symbol.match(operatorRegex)) {
       this.props.addSymbol(` ${symbol} `);
-    } else if (symbol.match(/^([0-9]|[.]){1}$/)) {
+    } else if (symbol.match(nbRegex)) {
       this.props.addSymbol(symbol);
     }
   }
@@ -26,7 +27,7 @@ export class KeypadContainer extends Component {
   getButtonCss(symbol) {
     if (symbol === '=') {
       return 'btn blue';
-    } else if (symbol.match(/^[/x+-]{1}$/)) {
+    } else if (symbol.match(operatorRegex)) {
       return 'btn grey lighten-1 text-black';
     } else {
       return 'btn grey lighten-3 text-black';

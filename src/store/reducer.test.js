@@ -25,6 +25,15 @@ describe('reducer', () => {
     });
   });
 
+  it('should not add incorrect symbol ADD_SYMBOL', () => {
+    expect(
+      reducer(initialState, {
+        type: actionsTypes.ADD_SYMBOL,
+        symbol: 'd'
+      })
+    ).toEqual(initialState);
+  });
+
   it('should handle RESOLVE_SYMBOL', () => {
     expect(
       reducer(
