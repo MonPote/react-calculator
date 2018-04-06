@@ -8,10 +8,15 @@ import ComputerInput from './ComputerInput';
 configure({ adapter: new Adapter() });
 
 describe('<ComputerInput />', () => {
-  // const initialState = { currentOperation };
-  it('render <ComputerInput />', () => {
+  it('render <ComputerInput /> without crash', () => {
     const wrapper = shallow(<ComputerInput />);
-    console.log('wrapper', wrapper);
-    // wrapper.setProps({ currentOperation: '1+1' });
+    expect(wrapper.contains(<div className="result-box" />)).toBe(true);
+  });
+
+  it('render correcttly the children', () => {
+    const wrapper = shallow(<ComputerInput>Hello</ComputerInput>);
+    expect(wrapper.contains(<div className="result-box">Hello</div>)).toBe(
+      true
+    );
   });
 });

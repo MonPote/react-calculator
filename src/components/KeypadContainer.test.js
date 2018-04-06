@@ -17,27 +17,14 @@ describe('<KeypadContainer', () => {
     wrapper = shallow(<KeypadContainer store={store} />);
   });
 
-  it('render Keypad', () => {
-    // const wrapper = shallow(<KeypadContainer />);
-    // expect(wrapper.find(ReactTable)).toHaveLength(1);
-    // console.log('wrapper', wrapper);
-    // expect(wrapper.length).toEqual(1);
-    // expect(wrapper.find(KeypadContainer).length).toEqual(1);
+  it('render KeypadContainer without crash', () => {
+    expect(wrapper).toHaveLength(1);
   });
 
-  it('render 9 elem', () => {
-    // expect(
-    //   wrapper.contains(
-    //     <a
-    //       key={7}
-    //       className={'Keypad-key-child btn grey lighten-1 text-black'}
-    //       onClick={() => this.resolveButton(key)}
-    //     >
-    //       7
-    //     </a>
-    //   )
-    // ).toBe(true);
-  });
+  // FIXME somehow redux broke this test
+  it('render Keypad-key-parent div');
+  // FIXME somehow redux broke this test
+  it('render 16 <a/> elem');
 
   it('check props matches with initialState', () => {
     expect(wrapper.prop('currentOperation')).toEqual(
