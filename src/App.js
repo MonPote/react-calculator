@@ -39,9 +39,10 @@ class App extends Component {
   }
 
   spaceEventFunction(event) {
-    if (event.keyCode === 32) {
+    if (!this.props.isMonkeyTyping && event.keyCode === 32) {
       const randomExp = this.generateSimpleRandomExpr();
       const randomExpArray = [...randomExp];
+      this.props.updateIsMonkeyTyping(true);
 
       Observable.interval(50 /* ms */)
         .take(randomExpArray.length)
@@ -59,6 +60,7 @@ class App extends Component {
               // Should never arrive here
               this.props.displayError();
             }
+            this.props.updateIsMonkeyTyping(false);
           }
         );
     }
@@ -103,7 +105,8 @@ class App extends Component {
 const mapStateToProps = state => {
   return {
     currentResult: state.currentResult,
-    currentOperation: state.currentOperation
+    currentOperation: state.currentOperation,
+    isMonkeyTyping: state.isMonkeyTyping
   };
 };
 
@@ -112,7 +115,9 @@ const mapDispatchToPros = dispatch => {
     addSymbol: symbol => dispatch({ type: actionTypes.ADD_SYMBOL, symbol }),
     resolveCompute: symbol =>
       dispatch({ type: actionTypes.RESOLVE_SYMBOL, symbol }),
-    displayError: () => dispatch({ type: actionTypes.DISPLAY_ERROR })
+    displayError: () => dispatch({ type: actionTypes.DISPLAY_ERROR }),
+    updateIsMonkeyTyping: isTyping =>
+      dispatch({ type: actionTypes.MONKEY_IS_TYPING, isTyping })
   };
 };
 

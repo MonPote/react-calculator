@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import math from 'mathjs';
 import * as actionTypes from '../store/actions';
+import './KeypadContainer.css';
 
 class KeypadContainer extends Component {
   keys = [
@@ -26,11 +27,13 @@ class KeypadContainer extends Component {
   resolveButton(symbol) {
     if (symbol === '=') {
       const expr = this.props.currentOperation.replace(/x/g, '*');
-      try {
-        const result = math.eval(expr);
-        this.props.resolveCompute(result);
-      } catch (e) {
-        this.props.displayError();
+      if (expr.length > 0) {
+        try {
+          const result = math.eval(expr);
+          this.props.resolveCompute(result);
+        } catch (e) {
+          this.props.displayError();
+        }
       }
     } else if (symbol.match(/^[/x+-]{1}$/)) {
       this.props.addSymbol(` ${symbol} `);
@@ -51,11 +54,11 @@ class KeypadContainer extends Component {
 
   render() {
     return (
-      <div className="App-test-parent">
+      <div className="Keypad-key-parent">
         {this.keys.map(key => (
           <a
             key={key}
-            className={'App-test-child ' + this.getButtonCss(key)}
+            className={'Keypad-key-child ' + this.getButtonCss(key)}
             onClick={() => this.resolveButton(key)}
           >
             {key}

@@ -1,0 +1,13 @@
+.Keypad-key-parent {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.Keypad-key-child {
+  flex: 1 20%;
+  margin: 5px;
+}
+
+.text-black {
+  color: black !important
+}
