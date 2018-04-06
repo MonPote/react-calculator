@@ -4,26 +4,7 @@ import math from 'mathjs';
 import * as actionTypes from '../store/actions';
 import './KeypadContainer.css';
 
-class KeypadContainer extends Component {
-  keys = [
-    '7',
-    '8',
-    '9',
-    '/',
-    '4',
-    '5',
-    '6',
-    '+',
-    '1',
-    '2',
-    '3',
-    '-',
-    '0',
-    '.',
-    '=',
-    'x'
-  ];
-
+export class KeypadContainer extends Component {
   resolveButton(symbol) {
     if (symbol === '=') {
       const expr = this.props.currentOperation.replace(/x/g, '*');
@@ -53,9 +34,28 @@ class KeypadContainer extends Component {
   }
 
   render() {
+    const keys = [
+      '7',
+      '8',
+      '9',
+      '/',
+      '4',
+      '5',
+      '6',
+      '+',
+      '1',
+      '2',
+      '3',
+      '-',
+      '0',
+      '.',
+      '=',
+      'x'
+    ];
+
     return (
       <div className="Keypad-key-parent">
-        {this.keys.map(key => (
+        {keys.map(key => (
           <a
             key={key}
             className={'Keypad-key-child ' + this.getButtonCss(key)}
