@@ -21,21 +21,44 @@ class App extends Component {
     document.removeEventListener('keydown', this.spaceEventFunction, false);
   }
 
+  generateSimpleRandomExpr() {
+    const maxNbOfValue = 5;
+    const maxValueOfRandom = 10000;
+    const nbOfValue = math.randomInt(2, maxNbOfValue);
+    const arrayOfOperator = ['x', '/', '+', '-'];
+
+    let randomExp = math.randomInt(maxValueOfRandom);
+    for (let i = 0; i < nbOfValue; ++i) {
+      let operator = math.pickRandom(arrayOfOperator);
+      randomExp = `${randomExp} ${operator} ${math.randomInt(
+        maxValueOfRandom
+      )}`;
+    }
+
+    return randomExp;
+  }
+
   spaceEventFunction(event) {
     if (event.keyCode === 32) {
-      //FIXME Create random function
-      const testArr = [...'123213+4324324'];
+      const randomExp = this.generateSimpleRandomExpr();
+      const randomExpArray = [...randomExp];
 
       Observable.interval(50 /* ms */)
-        .take(testArr.length)
+        .take(randomExpArray.length)
         .subscribe(
           idx => {
-            this.props.addSymbol(testArr[idx]);
+            this.props.addSymbol(randomExpArray[idx]);
           },
           undefined,
           () => {
-            const result = math.eval(this.props.currentOperation);
-            this.props.resolveCompute(result);
+            const expr = randomExp.replace(/x/g, '*');
+            try {
+              const result = math.eval(expr);
+              this.props.resolveCompute(result);
+            } catch (e) {
+              // Should never arrive here
+              this.props.displayError();
+            }
           }
         );
     }
@@ -88,7 +111,8 @@ const mapDispatchToPros = dispatch => {
   return {
     addSymbol: symbol => dispatch({ type: actionTypes.ADD_SYMBOL, symbol }),
     resolveCompute: symbol =>
-      dispatch({ type: actionTypes.RESOLVE_SYMBOL, symbol })
+      dispatch({ type: actionTypes.RESOLVE_SYMBOL, symbol }),
+    displayError: () => dispatch({ type: actionTypes.DISPLAY_ERROR })
   };
 };
 

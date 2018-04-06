@@ -25,7 +25,7 @@ class KeypadContainer extends Component {
 
   resolveButton(symbol) {
     if (symbol === '=') {
-      const expr = this.props.currentOperation.replace('x', '*');
+      const expr = this.props.currentOperation.replace(/x/g, '*');
       try {
         const result = math.eval(expr);
         this.props.resolveCompute(result);
