@@ -9,3 +9,5 @@ export const RESOLVE_SYMBOL = symbol => ({
 });
 
 export const CLEAR_OPERATION = () => ({ type: 'CLEAR_OPERATION' });
+
+export const DISPLAY_ERROR = () => ({ type: 'DISPLAY_ERROR' });

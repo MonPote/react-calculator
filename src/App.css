@@ -10,8 +10,18 @@
 
 .result-box {
   border: 1px solid gray;
+  padding: 0 3%;
   height: 45px; 
   display: flex;
   align-items: center;
   justify-content: flex-end;
+}
+
+.text-black {
+  color: black !important
+}
+
+.input-clear-row {
+  display: flex;
+  align-items: center
 }

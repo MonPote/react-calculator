@@ -18,6 +18,9 @@ const reducer = (state = intialState, action) => {
     case actionTypes.CLEAR_OPERATION: {
       return { ...state, currentOperation: '', currentResult: '0' };
     }
+    case actionTypes.DISPLAY_ERROR: {
+      return { ...state, currentResult: 'Error' };
+    }
     default:
       return state;
   }
